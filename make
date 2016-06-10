@@ -4,24 +4,38 @@ source ../aegis-docker/bin/aegis-config;
 export pwd=$(pwd);
 
 # 各成员站点的静态文件目录 以及文件上传挂载点
-member_static=$(cd ../aegis-member/static; pwd);
-pay_static=$(cd ../aegis-pay/; pwd);
-site_static=$(cd ../aegis-site/src-web;mkdir -p dist;cd dist;pwd);
 upload_root=$(cd ../; mkdir -p files; cd files; pwd);
 
 export container_name=nginx-dev;
 export project_name=ubuntu-nginx;
 export image_name=ubuntu-nginx;
 export ip="";
-export create_param="-v ${pwd}/sites-enabled:/etc/nginx/sites-enabled \
+
+
+mkdir -p logs;
+if [[ "$@" = "staging" ]]; then
+    member_static=$(cd ../aegis-member/static/dist; pwd);
+    pay_static=$(cd ../aegis-pay/app/dist; pwd);
+    site_static=$(cd ../aegis-site/src-web/dist;cd dist;pwd);
+    export create_param="-v ${pwd}/sites-enabled:/etc/nginx/sites-enabled \
+-v ${pwd}/logs:/var/log/nginx \
+-v ${pwd}/certs:/etc/nginx/certs \
+-v ${member_static}:/nginx/member/static \
+-v ${pay_static}/public:/nginx/pay/static \
+-v ${site_static}:/nginx/site/static \
+-v ${upload_root}:/files";
+else
+    member_static=$(cd ../aegis-member/static; pwd);
+    pay_static=$(cd ../aegis-pay/app; mkdir -p dist; cd dist; pwd);
+    site_static=$(cd ../aegis-site/src-web; mkdir -p dist;cd dist;pwd);
+    export create_param="-v ${pwd}/sites-enabled:/etc/nginx/sites-enabled \
 -v ${pwd}/log:/var/log/nginx \
 -v ${pwd}/certs:/etc/nginx/certs \
 -v ${member_static}:/nginx/member/static \
 -v ${pay_static}/public:/nginx/pay/static \
 -v ${site_static}:/nginx/site/static \
 -v ${upload_root}:/files";
-export dev_registry=192.168.99.100:5000;
-export registry=registry.yimei180.com;
+fi
 
 # 重写mbt!!!!!
 mbt_rewrite;
