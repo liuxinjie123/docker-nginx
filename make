@@ -14,27 +14,27 @@ export ip="";
 
 mkdir -p logs;
 if [[ "$@" = "staging" ]]; then
-    member_static=$(mkdir -p  ../aegis-member/static/dist; cd ../aegis-member/static/dist; pwd);
-    pay_static=$(mkdir -p ../aegis-pay/app/dist; cd ../aegis-pay/app/dist; pwd);
-    site_static=$(mkdir -p ../aegis-site/src-web/dist; cd ../aegis-site/src-web/dist; pwd);
+    member_static=$(mkdir -p ../aegis-member/static/dist; cd ../aegis-member/static/dist; pwd);
+    pay_static=$(   mkdir -p ../aegis-pay/app/dist;       cd ../aegis-pay/app/dist;       pwd);
+    site_static=$(  mkdir -p ../aegis-site/src-web/dist;  cd ../aegis-site/src-web/dist;  pwd);
     export create_param="-v ${pwd}/sites-enabled:/etc/nginx/sites-enabled \
 -v ${pwd}/logs:/var/log/nginx \
 -v ${pwd}/certs:/etc/nginx/certs \
 -v ${member_static}:/nginx/member/static \
 -v ${pay_static}/public:/nginx/pay/static \
 -v ${site_static}:/nginx/site/static \
--v ${upload_root}:/files";
+-v ${upload_root}:/nginx/files";
 else
     member_static=$(cd ../aegis-member/static; pwd);
-    pay_static=$(cd ../aegis-pay/app; mkdir -p dist; cd dist; pwd);
-    site_static=$(cd ../aegis-site/src-web; mkdir -p dist;cd dist;pwd);
+    pay_static=$(   cd ../aegis-pay/app;       pwd);
+    site_static=$(  cd ../aegis-site/src-web;  mkdir -p dist; cd dist; pwd);
     export create_param="-v ${pwd}/sites-enabled:/etc/nginx/sites-enabled \
 -v ${pwd}/log:/var/log/nginx \
 -v ${pwd}/certs:/etc/nginx/certs \
 -v ${member_static}:/nginx/member/static \
 -v ${pay_static}/public:/nginx/pay/static \
 -v ${site_static}:/nginx/site/static \
--v ${upload_root}:/files";
+-v ${upload_root}:/nginx/files";
 fi
 
 # 重写mbt!!!!!
