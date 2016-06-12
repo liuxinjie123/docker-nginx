@@ -14,9 +14,9 @@ export ip="";
 
 mkdir -p logs;
 if [[ "$@" = "staging" ]]; then
-    member_static=$(cd ../aegis-member/static/dist; pwd);
-    pay_static=$(cd ../aegis-pay/app/dist; pwd);
-    site_static=$(cd ../aegis-site/src-web/dist;cd dist;pwd);
+    member_static=$(mkdir -p  ../aegis-member/static/dist; cd ../aegis-member/static/dist; pwd);
+    pay_static=$(mkdir -p ../aegis-pay/app/dist; cd ../aegis-pay/app/dist; pwd);
+    site_static=$(mkdir -p ../aegis-site/src-web/dist; cd ../aegis-site/src-web/dist; pwd);
     export create_param="-v ${pwd}/sites-enabled:/etc/nginx/sites-enabled \
 -v ${pwd}/logs:/var/log/nginx \
 -v ${pwd}/certs:/etc/nginx/certs \
