@@ -3,27 +3,25 @@ FROM ubuntu-1404
 MAINTAINER hary <94093146@qq.com>
 
 # 配置
-RUN echo "\n daemon off;" >> /etc/nginx/nginx.conf \
-  && chown -R www-data:www-data /var/lib/nginx
+ADD nginx.conf /etc/nginx/nginx.conf
+
+#
+ADD entrypoint.sh /entrypoint.sh
 
 # 配置与日志
-VOLUME [ \
-	"/etc/nginx/deny.list"  \
-	"/etc/nginx/sites-enabled"  \
-	"/etc/nginx/certs"  \
-	"/etc/nginx/conf.d" \
-	"/var/log/nginx" \
-]
+VOLUME /etc/nginx/deny
+VOLUME /etc/nginx/sites-enabled
+VOLUME /etc/nginx/certs
+VOLUME /etc/nginx/conf.d
+VOLUME /var/log/nginx
 
 # 挂载各站点的静态资源
-VOLUME [ \
-	"/nginx/member/static" \
-	"/nginx/site/static" \
-	"/nginx/pay/static" \
-]
+VOLUME /nginx/member/static
+VOLUME /nginx/site/static
+VOLUME /nginx/pay/static
 
 # 上传文件挂载点
-VOLUME "/nginx/files"  
+VOLUME /nginx/files
 
 # nginx temp files
 RUN mkdir -p /nginx/tmp
@@ -35,5 +33,8 @@ WORKDIR /etc/nginx
 EXPOSE 80/tcp 443/tcp
 
 # 启动命令
-CMD /usr/sbin/nginx
+ENTRYPOINT [ "/entrypoint.sh" ]
+
+# 命令参数
+CMD [ "1000", "1000"]
 
