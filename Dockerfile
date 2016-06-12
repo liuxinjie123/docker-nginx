@@ -10,8 +10,12 @@ RUN echo "\n daemon off;" >> /etc/nginx/nginx.conf \
 ADD run.sh /run.sh
 RUN chmod +x /run.sh
 
+# 添加deny.list:  可覆盖!!!
+ADD deny.list /etc/nginx/deny.list
+
 # 配置与日志
 VOLUME [ \
+	"/etc/nginx/deny.list"  \
 	"/etc/nginx/sites-enabled"  \
 	"/etc/nginx/certs"  \
 	"/etc/nginx/conf.d" \
