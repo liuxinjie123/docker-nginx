@@ -17,6 +17,7 @@ if [[ "$@" = "staging" ]]; then
     member_static=$(mkdir -p ../aegis-member/static/dist; cd ../aegis-member/static/dist; pwd);
     pay_static=$(   mkdir -p ../aegis-pay/app/dist;       cd ../aegis-pay/app/dist;       pwd);
     site_static=$(  mkdir -p ../aegis-site/src-web/dist;  cd ../aegis-site/src-web/dist;  pwd);
+    admin_static=$(  mkdir -p ../kitt/admin/src-web/dist;  cd ../kitt/admin/src-web/dist;  pwd);
     export create_param="-v ${pwd}/sites-enabled:/etc/nginx/sites-enabled \
 -v ${pwd}/deny:/etc/nginx/deny \
 -v ${pwd}/logs:/var/log/nginx \
@@ -24,6 +25,7 @@ if [[ "$@" = "staging" ]]; then
 -v ${member_static}:/nginx/member/static \
 -v ${pay_static}/public:/nginx/pay/static \
 -v ${site_static}:/nginx/site/static \
+-v ${admin_static}:/nginx/admin/static \
 -v ${upload_root}:/nginx/files";
 else
     member_static=$(cd ../aegis-member/static; pwd);
