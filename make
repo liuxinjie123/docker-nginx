@@ -31,7 +31,7 @@ else
     site_static=$(  cd ../aegis-site/src-web;  mkdir -p dist; cd dist; pwd);
     export create_param="-v ${pwd}/sites-enabled:/etc/nginx/sites-enabled \
 -v ${pwd}/deny:/etc/nginx/deny \
--v ${pwd}/log:/var/log/nginx \
+-v ${pwd}/logs:/var/log/nginx \
 -v ${pwd}/certs:/etc/nginx/certs \
 -v ${member_static}:/nginx/member/static \
 -v ${pay_static}/public:/nginx/pay/static \
@@ -44,6 +44,14 @@ mbt_rewrite;
 devCreate() {
 	touch logs/access.log;
 	touch logs/error.log;
+	touch logs/jenkins_access.log;
+	touch logs/jenkins_error.log;
+ 	touch logs/site_access.log;
+    touch logs/site_error.log;
+	touch logs/member_access.log;
+    touch logs/member_error.log;
+	touch logs/pay_access.log;
+    touch logs/pay_error.log;
 	if ! docker run -d --name $container_name --net host $create_param $image_name > /dev/null; then
         echo "ERROR: [docker run -d --name $container_name --net host $create_param $image_name] failed" | color red bold;
         exit -1;
