@@ -20,7 +20,7 @@ if [[ "$@" = "staging" ]]; then
     export create_param="-v ${pwd}/sites-enabled:/etc/nginx/sites-enabled \
 -v ${pwd}/deny:/etc/nginx/deny \
 -v ${pwd}/logs:/var/log/nginx \
--v ${pwd}/certs:/etc/nginx/certs \
+-v ${pwd}/certs-prod:/etc/nginx/certs \
 -v ${member_static}:/nginx/member/static \
 -v ${pay_static}/public:/nginx/pay/static \
 -v ${site_static}:/nginx/site/static \
