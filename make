@@ -17,8 +17,22 @@ if [[ "$@" = "staging" ]]; then
     member_static=$(mkdir -p ../aegis-member/static/dist; cd ../aegis-member/static/dist; pwd);
     pay_static=$(   mkdir -p ../aegis-pay/app/dist;       cd ../aegis-pay/app/dist;       pwd);
     site_static=$(  mkdir -p ../aegis-site/src-web/dist;  cd ../aegis-site/src-web/dist;  pwd);
-    admin_static=$(  mkdir -p ../kitt/admin/src-web/dist;  cd ../kitt/admin/src-web/dist;  pwd);
+    admin_static=$( mkdir -p ../kitt/admin/src-web/dist;  cd ../kitt/admin/src-web/dist;  pwd);
     export create_param="-v ${pwd}/sites-enabled:/etc/nginx/sites-enabled \
+-v ${pwd}/deny:/etc/nginx/deny \
+-v ${pwd}/logs:/var/log/nginx \
+-v ${pwd}/certs-prod:/etc/nginx/certs \
+-v ${member_static}:/nginx/member/static \
+-v ${pay_static}/public:/nginx/pay/static \
+-v ${site_static}:/nginx/site/static \
+-v ${admin_static}:/nginx/admin/static \
+-v ${upload_root}:/nginx/files";
+elif [[ "$@" = "testing" ]]; then
+    member_static=$(mkdir -p ../aegis-member/static/dist; cd ../aegis-member/static/dist; pwd);
+    pay_static=$(   mkdir -p ../aegis-pay/app/dist;       cd ../aegis-pay/app/dist;       pwd);
+    site_static=$(  mkdir -p ../aegis-site/src-web/dist;  cd ../aegis-site/src-web/dist;  pwd);
+    admin_static=$( mkdir -p ../kitt/admin/src-web/dist;  cd ../kitt/admin/src-web/dist;  pwd);
+    export create_param="-v ${pwd}/sites-enabled-testing:/etc/nginx/sites-enabled \
 -v ${pwd}/deny:/etc/nginx/deny \
 -v ${pwd}/logs:/var/log/nginx \
 -v ${pwd}/certs-prod:/etc/nginx/certs \
@@ -46,14 +60,22 @@ mbt_rewrite;
 devCreate() {
 	touch logs/access.log;
 	touch logs/error.log;
-	touch logs/jenkins_access.log;
-	touch logs/jenkins_error.log;
- 	touch logs/site_access.log;
-    touch logs/site_error.log;
-	touch logs/member_access.log;
-    touch logs/member_error.log;
-	touch logs/pay_access.log;
-    touch logs/pay_error.log;
+
+	touch logs/jenkins.access.log;
+	touch logs/jenkins.error.log;
+
+ 	touch logs/site.access.log;
+    touch logs/site.error.log;
+
+	touch logs/member.access.log;
+    touch logs/member.error.log;
+
+	touch logs/pay.access.log;
+    touch logs/pay.error.log;
+
+	touch logs/admin.access.log;
+    touch logs/wechat.error.log;
+
 	if ! docker run -d --name $container_name --net host $create_param $image_name > /dev/null; then
         echo "ERROR: [docker run -d --name $container_name --net host $create_param $image_name] failed" | color red bold;
         exit -1;
@@ -63,6 +85,10 @@ devCreate() {
 stagingCreate() {
 	devCreate;
 }
+testingCreate() {
+	devCreate;
+}
+
 local() { echo "ERROR: target not supported" | color red bold; }
 debug() { echo "ERROR: target not supported" | color red bold; }
 
