@@ -82,6 +82,9 @@ devCreate() {
     touch logs/pay.error.log;
 
 	touch logs/admin.access.log;
+	touch logs/admin.error.log;
+
+    touch logs/wechat.access.log;
     touch logs/wechat.error.log;
 
 	if ! docker run -d --name $container_name --net host $create_param $image_name > /dev/null; then
