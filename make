@@ -14,10 +14,11 @@ export ip="";
 
 mkdir -p logs;
 if [[ "$@" = "staging" ]]; then
-    member_static=$(mkdir -p ../aegis-member/static/dist; cd ../aegis-member/static/dist; pwd);
-    pay_static=$(   mkdir -p ../aegis-pay/app/dist;       cd ../aegis-pay/app/dist;       pwd);
-    site_static=$(  mkdir -p ../aegis-site/src-web/dist;  cd ../aegis-site/src-web/dist;  pwd);
-    admin_static=$( mkdir -p ../kitt/admin/src-web/dist;  cd ../kitt/admin/src-web/dist;  pwd);
+    member_static=$(mkdir -p ../aegis-member/static/dist;   cd ../aegis-member/static/dist; pwd);
+    pay_static=$(   mkdir -p ../aegis-pay/app/dist;         cd ../aegis-pay/app/dist;       pwd);
+    site_static=$(  mkdir -p ../aegis-site/src-web/dist;    cd ../aegis-site/src-web/dist;  pwd);
+    admin_static=$( mkdir -p ../kitt/admin/src-web/dist;    cd ../kitt/admin/src-web/dist;  pwd);
+    wechat_static=$( mkdir -p ../kitt/wechat/src-web/dist;  cd ../kitt/wechat/src-web/dist;  pwd);
     export create_param="-v ${pwd}/sites-enabled:/etc/nginx/sites-enabled \
 -v ${pwd}/deny:/etc/nginx/deny \
 -v ${pwd}/logs:/var/log/nginx \
@@ -26,12 +27,14 @@ if [[ "$@" = "staging" ]]; then
 -v ${pay_static}:/nginx/pay/static \
 -v ${site_static}:/nginx/site/static \
 -v ${admin_static}:/nginx/admin/static \
+-v ${wechat_static}:/nginx/wechat/static \
 -v ${upload_root}:/nginx/files";
 elif [[ "$@" = "testing" ]]; then
-    member_static=$(mkdir -p ../aegis-member/static/dist; cd ../aegis-member/static/dist; pwd);
-    pay_static=$(   mkdir -p ../aegis-pay/app/dist;       cd ../aegis-pay/app/dist;       pwd);
-    site_static=$(  mkdir -p ../aegis-site/src-web/dist;  cd ../aegis-site/src-web/dist;  pwd);
-    admin_static=$( mkdir -p ../kitt/admin/src-web/dist;  cd ../kitt/admin/src-web/dist;  pwd);
+    member_static=$(mkdir -p ../aegis-member/static/dist;  cd ../aegis-member/static/dist; pwd);
+    pay_static=$(   mkdir -p ../aegis-pay/app/dist;        cd ../aegis-pay/app/dist;       pwd);
+    site_static=$(  mkdir -p ../aegis-site/src-web/dist;   cd ../aegis-site/src-web/dist;  pwd);
+    admin_static=$( mkdir -p ../kitt/admin/src-web/dist;   cd ../kitt/admin/src-web/dist;  pwd);
+    wechat_static=$( mkdir -p ../kitt/wechat/src-web/dist; cd ../kitt/wechat/src-web/dist; pwd);
     export create_param="-v ${pwd}/sites-enabled-testing:/etc/nginx/sites-enabled \
 -v ${pwd}/deny:/etc/nginx/deny \
 -v ${pwd}/logs:/var/log/nginx \
@@ -40,11 +43,14 @@ elif [[ "$@" = "testing" ]]; then
 -v ${pay_static}:/nginx/pay/static \
 -v ${site_static}:/nginx/site/static \
 -v ${admin_static}:/nginx/admin/static \
+-v ${wechat_static}:/nginx/wechat/static \
 -v ${upload_root}:/nginx/files";
 else
     member_static=$(cd ../aegis-member/static; pwd);
     pay_static=$(   cd ../aegis-pay/app;       pwd);
     site_static=$(  cd ../aegis-site/src-web;  mkdir -p dist; cd dist; pwd);
+    admin_static=$( mkdir -p ../kitt/admin/src-web/dist;  cd ../kitt/admin/src-web/dist;  pwd);
+    wechat_static=$( mkdir -p ../kitt/wechat/src-web/dist; cd ../kitt/wechat/src-web/dist; pwd);
     export create_param="-v ${pwd}/sites-enabled-dev:/etc/nginx/sites-enabled \
 -v ${pwd}/deny:/etc/nginx/deny \
 -v ${pwd}/logs:/var/log/nginx \
@@ -52,6 +58,8 @@ else
 -v ${member_static}:/nginx/member/static \
 -v ${pay_static}:/nginx/pay/static \
 -v ${site_static}:/nginx/site/static \
+-v ${wechat_static}:/nginx/admin/static \
+-v ${wechat_static}:/nginx/wechat/static \
 -v ${upload_root}:/nginx/files";
 fi
 
