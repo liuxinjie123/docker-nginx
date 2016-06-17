@@ -45,7 +45,7 @@ else
     member_static=$(cd ../aegis-member/static; pwd);
     pay_static=$(   cd ../aegis-pay/app;       pwd);
     site_static=$(  cd ../aegis-site/src-web;  mkdir -p dist; cd dist; pwd);
-    export create_param="-v ${pwd}/sites-enabled:/etc/nginx/sites-enabled \
+    export create_param="-v ${pwd}/sites-enabled-dev:/etc/nginx/sites-enabled \
 -v ${pwd}/deny:/etc/nginx/deny \
 -v ${pwd}/logs:/var/log/nginx \
 -v ${pwd}/certs:/etc/nginx/certs \
