@@ -23,7 +23,7 @@ if [[ "$@" = "staging" ]]; then
 -v ${pwd}/logs:/var/log/nginx \
 -v ${pwd}/certs-prod:/etc/nginx/certs \
 -v ${member_static}:/nginx/member/static \
--v ${pay_static}/public:/nginx/pay/static \
+-v ${pay_static}:/nginx/pay/static \
 -v ${site_static}:/nginx/site/static \
 -v ${admin_static}:/nginx/admin/static \
 -v ${upload_root}:/nginx/files";
@@ -37,7 +37,7 @@ elif [[ "$@" = "testing" ]]; then
 -v ${pwd}/logs:/var/log/nginx \
 -v ${pwd}/certs-prod:/etc/nginx/certs \
 -v ${member_static}:/nginx/member/static \
--v ${pay_static}/public:/nginx/pay/static \
+-v ${pay_static}:/nginx/pay/static \
 -v ${site_static}:/nginx/site/static \
 -v ${admin_static}:/nginx/admin/static \
 -v ${upload_root}:/nginx/files";
@@ -50,7 +50,7 @@ else
 -v ${pwd}/logs:/var/log/nginx \
 -v ${pwd}/certs:/etc/nginx/certs \
 -v ${member_static}:/nginx/member/static \
--v ${pay_static}/public:/nginx/pay/static \
+-v ${pay_static}:/nginx/pay/static \
 -v ${site_static}:/nginx/site/static \
 -v ${upload_root}:/nginx/files";
 fi
