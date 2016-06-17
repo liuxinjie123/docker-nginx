@@ -58,7 +58,7 @@ else
 -v ${member_static}:/nginx/member/static \
 -v ${pay_static}:/nginx/pay/static \
 -v ${site_static}:/nginx/site/static \
--v ${wechat_static}:/nginx/admin/static \
+-v ${admin_static}:/nginx/admin/static \
 -v ${wechat_static}:/nginx/wechat/static \
 -v ${upload_root}:/nginx/files";
 fi
