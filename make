@@ -46,10 +46,10 @@ elif [[ "$@" = "testing" ]]; then
 -v ${wechat_static}:/nginx/wechat/static \
 -v ${upload_root}:/nginx/files";
 else
-    member_static=$(cd ../aegis-member/static; pwd);
+    member_static=$(mkdir -p ../aegis-member/static/dist;  cd ../aegis-member/static/dist; pwd);
     pay_static=$(   mkdir -p ../aegis-pay/frontend/dist;        cd ../aegis-pay/frontend/dist;       pwd);
-	site_static=$(  cd ../aegis-site/src-web;  mkdir -p dist; cd dist; pwd);
-    admin_static=$( mkdir -p ../kitt/admin/src-web/dist;  cd ../kitt/admin/src-web/dist;  pwd);
+    site_static=$(  mkdir -p ../aegis-site/src-web/dist;   cd ../aegis-site/src-web/dist;  pwd);
+    admin_static=$( mkdir -p ../kitt/admin/src-web/dist;   cd ../kitt/admin/src-web/dist;  pwd);
     wechat_static=$( mkdir -p ../kitt/wechat/src-web/dist; cd ../kitt/wechat/src-web/dist; pwd);
     export create_param="-v ${pwd}/sites-enabled-dev:/etc/nginx/sites-enabled \
 -v ${pwd}/deny:/etc/nginx/deny \
