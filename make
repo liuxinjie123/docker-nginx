@@ -18,7 +18,7 @@ if [[ "$@" = "staging" ]]; then
     pay_static=$(   mkdir -p ../aegis-pay/frontend/dist;         cd ../aegis-pay/frontend/dist;       pwd);
     site_static=$(  mkdir -p ../aegis-site/src-web/dist;    cd ../aegis-site/src-web/dist;  pwd);
     admin_static=$( mkdir -p ../kitt/admin/src-web/dist;    cd ../kitt/admin/src-web/dist;  pwd);
-    wechat_static=$( mkdir -p ../kitt/wechat/src-web/dist;  cd ../kitt/wechat/src-web/dist;  pwd);
+    wechat_static=$( mkdir -p ../aegis-wechat/src-web/dist;  cd ../aegis-wechat/src-web/dist;  pwd);
     export create_param="-v ${pwd}/sites-enabled:/etc/nginx/sites-enabled \
 -v ${pwd}/deny:/etc/nginx/deny \
 -v ${pwd}/logs:/var/log/nginx \
@@ -34,7 +34,7 @@ elif [[ "$@" = "testing" ]]; then
     pay_static=$(   mkdir -p ../aegis-pay/frontend/dist;        cd ../aegis-pay/frontend/dist;       pwd);
     site_static=$(  mkdir -p ../aegis-site/src-web/dist;   cd ../aegis-site/src-web/dist;  pwd);
     admin_static=$( mkdir -p ../kitt/admin/src-web/dist;   cd ../kitt/admin/src-web/dist;  pwd);
-    wechat_static=$( mkdir -p ../kitt/wechat/src-web/dist; cd ../kitt/wechat/src-web/dist; pwd);
+    wechat_static=$( mkdir -p ../aegis-wechat/src-web/dist; cd ../aegis-wechat/src-web/dist; pwd);
     export create_param="-v ${pwd}/sites-enabled-testing:/etc/nginx/sites-enabled \
 -v ${pwd}/deny:/etc/nginx/deny \
 -v ${pwd}/logs:/var/log/nginx \
@@ -50,7 +50,7 @@ else
     pay_static=$(   mkdir -p ../aegis-pay/frontend/dist;        cd ../aegis-pay/frontend/dist;       pwd);
     site_static=$(  mkdir -p ../aegis-site/src-web/dist;   cd ../aegis-site/src-web/dist;  pwd);
     admin_static=$( mkdir -p ../kitt/admin/src-web/dist;   cd ../kitt/admin/src-web/dist;  pwd);
-    wechat_static=$( mkdir -p ../kitt/wechat/src-web/dist; cd ../kitt/wechat/src-web/dist; pwd);
+    wechat_static=$( mkdir -p ../aegis-wechat/src-web/dist; cd ../aegis-wechat/src-web/dist; pwd);
     export create_param="-v ${pwd}/sites-enabled-dev:/etc/nginx/sites-enabled \
 -v ${pwd}/deny:/etc/nginx/deny \
 -v ${pwd}/logs:/var/log/nginx \
