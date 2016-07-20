@@ -25,7 +25,7 @@ if [[ "$@" = "staging" ]]; then
 -v ${pwd}/certs-prod:/etc/nginx/certs \
 --volumes-from member-ui-data \
 --volumes-from pay-ui-data \
--v ${site_static}:/nginx/site/static \
+--volumes-from site-ui-data \
 -v ${admin_static}:/nginx/admin/static \
 -v ${wechat_static}:/nginx/wechat/static \
 -v ${upload_root}:/nginx/files";
@@ -41,7 +41,7 @@ elif [[ "$@" = "testing" ]]; then
 -v ${pwd}/certs-prod:/etc/nginx/certs \
 --volumes-from member-ui-data \
 --volumes-from pay-ui-data \
--v ${site_static}:/nginx/site/static \
+--volumes-from site-ui-data \
 -v ${admin_static}:/nginx/admin/static \
 -v ${wechat_static}:/nginx/wechat/static \
 -v ${upload_root}:/nginx/files";
