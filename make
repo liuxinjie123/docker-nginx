@@ -23,11 +23,11 @@ if [[ "$@" = "staging" ]]; then
 -v ${pwd}/deny:/etc/nginx/deny \
 -v ${pwd}/logs:/var/log/nginx \
 -v ${pwd}/certs-prod:/etc/nginx/certs \
---volumes-from member-ui-data \
---volumes-from pay-ui-data \
---volumes-from site-ui-data \
+--volumes-from member-ui \
+--volumes-from pay-ui \
+--volumes-from site-ui \
 -v ${admin_static}:/nginx/admin/static \
---volumes-from wechat-ui-data \
+--volumes-from wechat-ui \
 -v ${upload_root}:/nginx/files";
 elif [[ "$@" = "testing" ]]; then
     member_static=$(mkdir -p ../aegis-member/static/dist;  cd ../aegis-member/static/dist; pwd);
@@ -39,11 +39,11 @@ elif [[ "$@" = "testing" ]]; then
 -v ${pwd}/deny:/etc/nginx/deny \
 -v ${pwd}/logs:/var/log/nginx \
 -v ${pwd}/certs-prod:/etc/nginx/certs \
---volumes-from member-ui-data \
---volumes-from pay-ui-data \
---volumes-from site-ui-data \
+--volumes-from member-ui \
+--volumes-from pay-ui \
+--volumes-from site-ui \
 -v ${admin_static}:/nginx/admin/static \
---volumes-from wechat-ui-data \
+--volumes-from wechat-ui \
 -v ${upload_root}:/nginx/files";
 else
     member_static=$(mkdir -p ../aegis-member/static/dist;  cd ../aegis-member/static/dist; pwd);
