@@ -27,7 +27,7 @@ if [[ "$@" = "staging" ]]; then
 --volumes-from pay-ui-data \
 --volumes-from site-ui-data \
 -v ${admin_static}:/nginx/admin/static \
--v ${wechat_static}:/nginx/wechat/static \
+--volumes-from wechat-ui-data \
 -v ${upload_root}:/nginx/files";
 elif [[ "$@" = "testing" ]]; then
     member_static=$(mkdir -p ../aegis-member/static/dist;  cd ../aegis-member/static/dist; pwd);
@@ -43,7 +43,7 @@ elif [[ "$@" = "testing" ]]; then
 --volumes-from pay-ui-data \
 --volumes-from site-ui-data \
 -v ${admin_static}:/nginx/admin/static \
--v ${wechat_static}:/nginx/wechat/static \
+--volumes-from wechat-ui-data \
 -v ${upload_root}:/nginx/files";
 else
     member_static=$(mkdir -p ../aegis-member/static/dist;  cd ../aegis-member/static/dist; pwd);
