@@ -24,7 +24,7 @@ if [[ "$@" = "staging" ]]; then
 -v ${pwd}/logs:/var/log/nginx \
 -v ${pwd}/certs-prod:/etc/nginx/certs \
 --volumes-from member-ui-data \
--v ${pay_static}:/nginx/pay/static \
+--volumes-from pay-ui-data \
 -v ${site_static}:/nginx/site/static \
 -v ${admin_static}:/nginx/admin/static \
 -v ${wechat_static}:/nginx/wechat/static \
@@ -40,7 +40,7 @@ elif [[ "$@" = "testing" ]]; then
 -v ${pwd}/logs:/var/log/nginx \
 -v ${pwd}/certs-prod:/etc/nginx/certs \
 --volumes-from member-ui-data \
--v ${pay_static}:/nginx/pay/static \
+--volumes-from pay-ui-data \
 -v ${site_static}:/nginx/site/static \
 -v ${admin_static}:/nginx/admin/static \
 -v ${wechat_static}:/nginx/wechat/static \
