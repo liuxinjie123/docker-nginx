@@ -23,7 +23,7 @@ if [[ "$@" = "staging" ]]; then
 -v ${pwd}/deny:/etc/nginx/deny \
 -v ${pwd}/logs:/var/log/nginx \
 -v ${pwd}/certs-prod:/etc/nginx/certs \
--v ${member_static}:/nginx/member/static \
+--volumes-from aegis-member-data \
 -v ${pay_static}:/nginx/pay/static \
 -v ${site_static}:/nginx/site/static \
 -v ${admin_static}:/nginx/admin/static \
@@ -39,7 +39,7 @@ elif [[ "$@" = "testing" ]]; then
 -v ${pwd}/deny:/etc/nginx/deny \
 -v ${pwd}/logs:/var/log/nginx \
 -v ${pwd}/certs-prod:/etc/nginx/certs \
--v ${member_static}:/nginx/member/static \
+--volumes-from aegis-member-data \
 -v ${pay_static}:/nginx/pay/static \
 -v ${site_static}:/nginx/site/static \
 -v ${admin_static}:/nginx/admin/static \
