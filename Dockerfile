@@ -20,6 +20,7 @@ VOLUME /nginx/member/static
 VOLUME /nginx/site/static
 VOLUME /nginx/pay/static
 VOLUME /nginx/admin/static
+VOLUME /nginx/logistics/static
 
 # 上传文件挂载点
 VOLUME /nginx/files

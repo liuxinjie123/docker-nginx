@@ -28,6 +28,7 @@ if [[ "$@" = "staging" ]]; then
 --volumes-from site-ui \
 -v ${admin_static}:/nginx/admin/static \
 --volumes-from wechat-ui \
+--volumes-from logistics-ui \
 -v ${upload_root}:/nginx/files";
 elif [[ "$@" = "testing" ]]; then
     member_static=$(mkdir -p ../aegis-member/static/dist;  cd ../aegis-member/static/dist; pwd);
@@ -44,6 +45,7 @@ elif [[ "$@" = "testing" ]]; then
 --volumes-from site-ui \
 -v ${admin_static}:/nginx/admin/static \
 --volumes-from wechat-ui \
+--volumes-from logistics-ui \
 -v ${upload_root}:/nginx/files";
 else
     member_static=$(mkdir -p ../aegis-member/static/dist;  cd ../aegis-member/static/dist; pwd);
@@ -51,6 +53,7 @@ else
     site_static=$(  mkdir -p ../aegis-site/src-web/dist;   cd ../aegis-site/src-web/dist;  pwd);
     admin_static=$( mkdir -p ../kitt/admin/src-web/dist;   cd ../kitt/admin/src-web/dist;  pwd);
     wechat_static=$( mkdir -p ../aegis-wechat/src-web/dist; cd ../aegis-wechat/src-web/dist; pwd);
+	logistics_static=$(  mkdir -p ../aegis-logistics/src-web/dist;   cd ../aegis-logistics/src-web/dist;  pwd);
     export create_param="-v ${pwd}/sites-enabled-dev:/etc/nginx/sites-enabled \
 -v ${pwd}/deny:/etc/nginx/deny \
 -v ${pwd}/logs:/var/log/nginx \
@@ -60,6 +63,7 @@ else
 -v ${site_static}:/nginx/site/static \
 -v ${admin_static}:/nginx/admin/static \
 -v ${wechat_static}:/nginx/wechat/static \
+-v ${logistics_static}:/nginx/logistics/static \
 -v ${upload_root}:/nginx/files";
 fi
 
