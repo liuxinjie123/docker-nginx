@@ -90,6 +90,9 @@ devCreate() {
 
     touch logs/wechat.access.log;
     touch logs/wechat.error.log;
+	
+	touch logs/logistics.access.log;
+    touch logs/logistics.error.log;
 
 	if ! docker run -d --name $container_name --net host $create_param $image_name > /dev/null; then
         echo "ERROR: [docker run -d --name $container_name --net host $create_param $image_name] failed" | color red bold;
