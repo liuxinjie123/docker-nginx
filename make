@@ -54,6 +54,7 @@ else
     admin_static=$( mkdir -p ../kitt/admin/src-web/dist;   cd ../kitt/admin/src-web/dist;  pwd);
     wechat_static=$( mkdir -p ../aegis-wechat/src-web/dist; cd ../aegis-wechat/src-web/dist; pwd);
 	logistics_static=$(  mkdir -p ../aegis-logistics/src-web/dist;   cd ../aegis-logistics/src-web/dist;  pwd);
+ 	info_static=$(  mkdir -p ../aegis-info/src-web/dist;   cd ../aegis-info/src-web/dist;  pwd);
     export create_param="-v ${pwd}/sites-enabled-dev:/etc/nginx/sites-enabled \
 -v ${pwd}/deny:/etc/nginx/deny \
 -v ${pwd}/logs:/var/log/nginx \
@@ -64,6 +65,7 @@ else
 -v ${admin_static}:/nginx/admin/static \
 -v ${wechat_static}:/nginx/wechat/static \
 -v ${logistics_static}:/nginx/logistics/static \
+-v ${info_static}:/nginx/info/static \
 -v ${upload_root}:/nginx/files";
 fi
 
@@ -93,6 +95,9 @@ devCreate() {
 	
 	touch logs/logistics.access.log;
     touch logs/logistics.error.log;
+
+	touch logs/info.access.log;
+    touch logs/info.error.log;
 
 	if ! docker run -d --name $container_name --net host $create_param $image_name > /dev/null; then
         echo "ERROR: [docker run -d --name $container_name --net host $create_param $image_name] failed" | color red bold;
