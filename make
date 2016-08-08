@@ -55,6 +55,7 @@ else
     wechat_static=$( mkdir -p ../aegis-wechat/src-web/dist; cd ../aegis-wechat/src-web/dist; pwd);
 	logistics_static=$(  mkdir -p ../aegis-logistics/src-web/dist;   cd ../aegis-logistics/src-web/dist;  pwd);
  	info_static=$(  mkdir -p ../aegis-info/src-web/dist;   cd ../aegis-info/src-web/dist;  pwd);
+    zrjt_pay_static=$(  mkdir -p ../zrjt-pay/static/dist;   cd ../zrjt-pay/static/dist;  pwd);
     export create_param="-v ${pwd}/sites-enabled-dev:/etc/nginx/sites-enabled \
 -v ${pwd}/deny:/etc/nginx/deny \
 -v ${pwd}/logs:/var/log/nginx \
@@ -66,6 +67,7 @@ else
 -v ${wechat_static}:/nginx/wechat/static \
 -v ${logistics_static}:/nginx/logistics/static \
 -v ${info_static}:/nginx/info/static \
+-v ${zrjt_pay_static}:/nginx/zrjt-pay/static \
 -v ${upload_root}:/nginx/files";
 fi
 
@@ -98,7 +100,10 @@ devCreate() {
 
 	touch logs/info.access.log;
     touch logs/info.error.log;
-
+	
+	touch logs/zrjt-pay_access.log;
+    touch logs/zrjt-pay_error.log;
+	
 	if ! docker run -d --name $container_name --net host $create_param $image_name > /dev/null; then
         echo "ERROR: [docker run -d --name $container_name --net host $create_param $image_name] failed" | color red bold;
         exit -1;
