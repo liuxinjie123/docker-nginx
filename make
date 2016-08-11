@@ -30,6 +30,7 @@ if [[ "$@" = "staging" ]]; then
 --volumes-from wechat-ui \
 --volumes-from logistics-ui \
 --volumes-from zrjt-ui \
+--volumes-from info-ui \
 -v ${upload_root}:/nginx/files";
 elif [[ "$@" = "testing" ]]; then
     member_static=$(mkdir -p ../aegis-member/static/dist;  cd ../aegis-member/static/dist; pwd);
@@ -47,6 +48,8 @@ elif [[ "$@" = "testing" ]]; then
 -v ${admin_static}:/nginx/admin/static \
 --volumes-from wechat-ui \
 --volumes-from logistics-ui \
+--volumes-from zrjt-ui \
+--volumes-from info-ui \
 -v ${upload_root}:/nginx/files";
 else
     member_static=$(mkdir -p ../aegis-member/static/dist;  cd ../aegis-member/static/dist; pwd);
@@ -104,6 +107,9 @@ devCreate() {
 	
 	touch logs/zrjt-pay_access.log;
     touch logs/zrjt-pay_error.log;
+
+	touch logs/info.access.log;
+    touch logs/info.error.log;
 	
 	if ! docker run -d --name $container_name --net host $create_param $image_name > /dev/null; then
         echo "ERROR: [docker run -d --name $container_name --net host $create_param $image_name] failed" | color red bold;
