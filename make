@@ -29,6 +29,7 @@ if [[ "$@" = "staging" ]]; then
 -v ${admin_static}:/nginx/admin/static \
 --volumes-from wechat-ui \
 --volumes-from logistics-ui \
+--volumes-from zrjt-ui \
 -v ${upload_root}:/nginx/files";
 elif [[ "$@" = "testing" ]]; then
     member_static=$(mkdir -p ../aegis-member/static/dist;  cd ../aegis-member/static/dist; pwd);
