@@ -27,6 +27,9 @@ VOLUME /nginx/zrjt-pay/static
 # 上传文件挂载点
 VOLUME /nginx/files
 
+# 上传文件挂载点
+VOLUME /nginx/zrjtFile
+
 # nginx temp files
 RUN mkdir -p /nginx/tmp
 
