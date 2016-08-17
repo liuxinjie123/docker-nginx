@@ -60,6 +60,7 @@ else
 	logistics_static=$(  mkdir -p ../aegis-logistics/src-web/dist;   cd ../aegis-logistics/src-web/dist;  pwd);
  	info_static=$(  mkdir -p ../aegis-info/src-web/dist;   cd ../aegis-info/src-web/dist;  pwd);
     zrjt_pay_static=$(  mkdir -p ../zrjt-pay/static/dist;   cd ../zrjt-pay/static/dist;  pwd);
+	bid_static=$(  mkdir -p ../aegis-bid/src-web/dist;   cd ../aegis-bid/src-web/dist;  pwd);
     export create_param="-v ${pwd}/sites-enabled-dev:/etc/nginx/sites-enabled \
 -v ${pwd}/deny:/etc/nginx/deny \
 -v ${pwd}/logs:/var/log/nginx \
@@ -72,6 +73,7 @@ else
 -v ${logistics_static}:/nginx/logistics/static \
 -v ${info_static}:/nginx/info/static \
 -v ${zrjt_pay_static}:/nginx/zrjt-pay/static \
+-v ${bid_static}:/nginx/bid/static \
 -v ${upload_root}:/nginx/files";
 fi
 
@@ -111,6 +113,9 @@ devCreate() {
 	touch logs/info.access.log;
     touch logs/info.error.log;
 	
+	touch logs/bid.access.log;
+    touch logs/bid.error.log;
+
 	if ! docker run -d --name $container_name --net host $create_param $image_name > /dev/null; then
         echo "ERROR: [docker run -d --name $container_name --net host $create_param $image_name] failed" | color red bold;
         exit -1;
