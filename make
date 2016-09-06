@@ -61,6 +61,8 @@ else
  	info_static=$(  mkdir -p ../aegis-info/src-web/dist;   cd ../aegis-info/src-web/dist;  pwd);
     zrjt_pay_static=$(  mkdir -p ../zrjt-pay/static/dist;   cd ../zrjt-pay/static/dist;  pwd);
 	bid_static=$(  mkdir -p ../aegis-bid/src-web/dist;   cd ../aegis-bid/src-web/dist;  pwd);
+	finance_site_static=$(  mkdir -p ../aegis-finance-admin/frontend-site/dist;   cd ../aegis-finance-admin/frontend-site/dist;  pwd);
+	finance_admin_static=$(  mkdir -p ../aegis-finance-admin/frontend-admin/dist;   cd ../aegis-finance-admin/frontend-admin/dist;  pwd);
     export create_param="-v ${pwd}/sites-enabled-dev:/etc/nginx/sites-enabled \
 -v ${pwd}/deny:/etc/nginx/deny \
 -v ${pwd}/logs:/var/log/nginx \
@@ -74,6 +76,8 @@ else
 -v ${info_static}:/nginx/info/static \
 -v ${zrjt_pay_static}:/nginx/zrjt-pay/static \
 -v ${bid_static}:/nginx/bid/static \
+-v ${finance_admin_static}:/nginx/finance/static/admin \
+-v ${finance_site_static}:/nginx/finance/static/site \
 -v ${upload_root}:/nginx/files";
 fi
 
@@ -115,6 +119,9 @@ devCreate() {
 	
 	touch logs/bid.access.log;
     touch logs/bid.error.log;
+
+ 	touch logs/finance.access.log;
+    touch logs/finance.error.log;
 
 	if ! docker run -d --name $container_name --net host $create_param $image_name > /dev/null; then
         echo "ERROR: [docker run -d --name $container_name --net host $create_param $image_name] failed" | color red bold;
