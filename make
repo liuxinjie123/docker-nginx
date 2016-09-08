@@ -26,7 +26,7 @@ if [[ "$@" = "staging" ]]; then
 --volumes-from member-ui \
 --volumes-from pay-ui \
 --volumes-from site-ui \
--v ${admin_static}:/nginx/admin/static \
+--volumes-from admin-ui \
 --volumes-from wechat-ui \
 --volumes-from logistics-ui \
 --volumes-from zrjt-ui \
