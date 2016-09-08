@@ -55,7 +55,7 @@ else
     member_static=$(mkdir -p ../aegis-member/static/dist;  cd ../aegis-member/static/dist; pwd);
     pay_static=$(   mkdir -p ../aegis-pay/frontend/dist;        cd ../aegis-pay/frontend/dist;       pwd);
     site_static=$(  mkdir -p ../aegis-site/src-web/dist;   cd ../aegis-site/src-web/dist;  pwd);
-    admin_static=$( mkdir -p ../kitt/admin/src-web/dist;   cd ../kitt/admin/src-web/dist;  pwd);
+    admin_static=$( mkdir -p ../aegis-admin/src-web/dist;   cd ../aegis-admin/src-web/dist;  pwd);
     wechat_static=$( mkdir -p ../aegis-wechat/src-web/dist; cd ../aegis-wechat/src-web/dist; pwd);
 	logistics_static=$(  mkdir -p ../aegis-logistics/src-web/dist;   cd ../aegis-logistics/src-web/dist;  pwd);
  	info_static=$(  mkdir -p ../aegis-info/src-web/dist;   cd ../aegis-info/src-web/dist;  pwd);
