@@ -31,6 +31,7 @@ if [[ "$@" = "staging" ]]; then
 --volumes-from logistics-ui \
 --volumes-from zrjt-ui \
 --volumes-from info-ui \
+--volumes-from finance-admin-ui \
 -v ${upload_root}:/nginx/files";
 elif [[ "$@" = "testing" ]]; then
     member_static=$(mkdir -p ../aegis-member/static/dist;  cd ../aegis-member/static/dist; pwd);
