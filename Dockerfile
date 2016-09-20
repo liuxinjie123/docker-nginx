@@ -25,6 +25,7 @@ VOLUME /nginx/info/static
 VOLUME /nginx/zrjt-pay/static
 VOLUME /nginx/bid/static
 VOLUME /nginx/finance/static
+VOLUME /nginx/chang/static
 
 # 上传文件挂载点
 VOLUME /nginx/files

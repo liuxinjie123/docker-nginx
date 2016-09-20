@@ -19,6 +19,7 @@ if [[ "$@" = "staging" ]]; then
     site_static=$(  mkdir -p ../aegis-site/src-web/dist;    cd ../aegis-site/src-web/dist;  pwd);
     admin_static=$( mkdir -p ../kitt/admin/src-web/dist;    cd ../kitt/admin/src-web/dist;  pwd);
     wechat_static=$( mkdir -p ../aegis-wechat/src-web/dist;  cd ../aegis-wechat/src-web/dist;  pwd);
+	chang_site=$( mkdir -p ../chang-site/src-web/dist; cd ../chang-site/src-web/dist; pwd);
     export create_param="-v ${pwd}/sites-enabled:/etc/nginx/sites-enabled \
 -v ${pwd}/deny:/etc/nginx/deny \
 -v ${pwd}/logs:/var/log/nginx \
@@ -32,6 +33,7 @@ if [[ "$@" = "staging" ]]; then
 --volumes-from zrjt-ui \
 --volumes-from info-ui \
 --volumes-from finance-admin-ui \
+-v ${chang_site}:/nginx/chang/static \
 -v ${upload_root}:/nginx/files";
 elif [[ "$@" = "testing" ]]; then
     member_static=$(mkdir -p ../aegis-member/static/dist;  cd ../aegis-member/static/dist; pwd);
@@ -123,6 +125,9 @@ devCreate() {
 
  	touch logs/finance.access.log;
     touch logs/finance.error.log;
+
+	touch logs/changadmin.access.log;
+	touch logs/changadmin.error.log;
 
 	if ! docker run -d --name $container_name --net host $create_param $image_name > /dev/null; then
         echo "ERROR: [docker run -d --name $container_name --net host $create_param $image_name] failed" | color red bold;
