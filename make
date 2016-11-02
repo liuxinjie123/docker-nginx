@@ -33,6 +33,7 @@ if [[ "$@" = "staging" ]]; then
 --volumes-from zrjt-ui \
 --volumes-from info-ui \
 --volumes-from finance-admin-ui \
+--volumes-from bid-ui \
 -v ${chang_site}:/nginx/chang/static \
 -v ${upload_root}:/nginx/files";
 elif [[ "$@" = "testing" ]]; then
