@@ -5,6 +5,7 @@ export pwd=$(pwd);
 
 # 各成员站点的静态文件目录 以及文件上传挂载点
 upload_root=$(cd ../; mkdir -p files; cd files; pwd);
+upload_zrjt=$(cd ../; mkdir -p zrjtFile; cd zrjtFile; pwd);
 
 export container_name=nginx-dev;
 export project_name=ubuntu-nginx;
@@ -34,7 +35,9 @@ if [[ "$@" = "staging" ]]; then
 --volumes-from info-ui \
 --volumes-from finance-admin-ui \
 --volumes-from bid-ui \
+--volumes-from yty-ui \
 -v ${chang_site}:/nginx/chang/static \
+-v ${upload_zrjt}:/nginx/zrjtFile \
 -v ${upload_root}:/nginx/files";
 elif [[ "$@" = "testing" ]]; then
     member_static=$(mkdir -p ../aegis-member/static/dist;  cd ../aegis-member/static/dist; pwd);
@@ -129,6 +132,9 @@ devCreate() {
 
 	touch logs/changadmin.access.log;
 	touch logs/changadmin.error.log;
+
+	touch logs/yty_access.log;
+    touch logs/yty_error.log;
 
 	if ! docker run -d --name $container_name --net host $create_param $image_name > /dev/null; then
         echo "ERROR: [docker run -d --name $container_name --net host $create_param $image_name] failed" | color red bold;
